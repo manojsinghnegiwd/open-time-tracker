@@ -13,15 +13,15 @@ const TaskComponent: React.FC<TaskProps> = (props: TaskProps) => {
 
   const [duration, setDuration] = useState<number>(0)
   const [intervalId, setIntervalId] = useState<number | null>(null)
-  const [timeoutId, setTimeoutId] = useState<number | null>(null)
+  const [saveIntervalId, setSaveIntervalId] = useState<number | null>(null)
 
   const handlePlay = useCallback(() => {
     if (intervalId) {
       clearInterval(intervalId)
     }
 
-    if (timeoutId) {
-      clearTimeout(timeoutId)
+    if (saveIntervalId) {
+      clearTimeout(saveIntervalId)
     }
     // creating a copy of duration so it can be used inside setInterval
     let newDuration = duration
@@ -31,7 +31,7 @@ const TaskComponent: React.FC<TaskProps> = (props: TaskProps) => {
       setDuration(newDuration)
     }, 1000)
 
-    const newTimeoutId = setTimeout(() => {
+    const newSaveIntervalId = setInterval(() => {
       handleTaskUpdate({
         ...task,
         duration: newDuration
@@ -39,8 +39,8 @@ const TaskComponent: React.FC<TaskProps> = (props: TaskProps) => {
     }, 1000 * 10);
 
     setIntervalId(newIntervalId)
-    setTimeoutId(newTimeoutId)
-  }, [intervalId, duration, task, setDuration, setIntervalId, handleTaskUpdate])
+    setSaveIntervalId(newSaveIntervalId)
+  }, [intervalId, saveIntervalId, duration, task, setDuration, setIntervalId, handleTaskUpdate])
 
   const handleClose = useCallback(() => {
     if (intervalId) {
@@ -48,8 +48,8 @@ const TaskComponent: React.FC<TaskProps> = (props: TaskProps) => {
       setIntervalId(null)
     }
 
-    if (timeoutId) {
-      clearInterval(timeoutId)
+    if (saveIntervalId) {
+      clearInterval(saveIntervalId)
       setIntervalId(null)
     }
 
@@ -57,7 +57,7 @@ const TaskComponent: React.FC<TaskProps> = (props: TaskProps) => {
       ...task,
       duration
     })
-  }, [intervalId, timeoutId, duration, task, handleTaskUpdate])
+  }, [intervalId, saveIntervalId, duration, task, handleTaskUpdate])
 
   useEffect(() => {
     if (task.duration !== duration) {
