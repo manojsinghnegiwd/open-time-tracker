@@ -196,6 +196,7 @@
     "@types/react-test-renderer": "^16.9.2",
     "@types/redux-logger": "^3.0.7",
     "@types/sinon": "^7.5.2",
+    "@types/styled-components": "^5.1.0",
     "@types/tapable": "^1.0.5",
     "@types/vfile-message": "^2.0.0",
     "@types/webpack": "^4.41.3",
@@ -273,7 +274,6 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@hot-loader/react-dom": "^16.13.0",
-    "@types/styled-components": "^5.1.0",
     "bulma": "^0.9.0",
     "connected-react-router": "^6.8.0",
     "core-js": "^3.6.5",
@@ -282,6 +282,7 @@
     "electron-log": "^4.0.6",
     "electron-updater": "^4.2.0",
     "history": "^4.10.1",
+    "moment": "^2.27.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-hot-loader": "^4.12.19",

@@ -32,6 +32,22 @@ const TaskManager: React.FC<TaskManagerProps> = (props: TaskManagerProps) => {
     store()
   }, [tasks, setTasks, storeManager])
 
+  const handleTaskUpdate = useCallback((updatedTask: Task) => {
+    const index = tasks.findIndex(task => task.id === updatedTask.id)
+
+    if (index > -1) {
+      const tasksCopy = [...tasks]
+      tasksCopy[index] = updatedTask
+      setTasks(tasksCopy)
+
+      const store = async () => {
+        await storeManager.store(tasksCopy)
+      }
+  
+      store()
+    }
+  }, [tasks, setTasks, storeManager])
+
   useEffect(() => {
     const load = async () => {
       const list = await storeManager.load()
@@ -45,7 +61,7 @@ const TaskManager: React.FC<TaskManagerProps> = (props: TaskManagerProps) => {
       <AddTask onAdd={addTask} />
       <TaskList
         tasks={tasks}
-        handleTaskUpdate={() => {}}
+        handleTaskUpdate={handleTaskUpdate}
       />
     </Container>
   );

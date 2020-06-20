@@ -1,6 +1,11 @@
 import React from 'react';
+import styled from "styled-components";
 import { Task } from '../../interfaces/Task';
 import TaskComponent from "./TaskComponent";
+
+const StyledTable = styled.table`
+  width: 100%;
+`
 
 interface TaskListProps {
   tasks: Task[],
@@ -20,19 +25,28 @@ const TaskList: React.FC<TaskListProps> = (props: TaskListProps) => {
   }
 
   return (
-    <div>
-      {
-        props.tasks.map(
-          (task, index) => (
-            <TaskComponent
+    <StyledTable className="table">
+      <thead>
+        <th>Task</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Duration</th>
+        <th></th>
+      </thead>
+      <tbody>
+        {
+          props.tasks.map(
+            (task, index) => (
+              <TaskComponent
                 key={index}
                 task={task}
                 handleTaskUpdate={props.handleTaskUpdate}
-            />
+              />
+            )
           )
-        )
-      }
-    </div>
+        }
+      </tbody>
+    </StyledTable>
   );
 }
 
