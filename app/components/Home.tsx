@@ -1,15 +1,7 @@
 import React from 'react';
-import styled from "styled-components"
-import AddTask from './dashboard/AddTask';
-
-const Container = styled.div`
-  padding: 10px;
-`
+import TaskManager from './dashboard/TaskManager';
+import storeManager from '../utils/StoreManager';
 
 export default function Home() {
-  return (
-    <Container>
-      <AddTask />
-    </Container>
-  );
+  return <TaskManager storeManager={storeManager}/>;
 }

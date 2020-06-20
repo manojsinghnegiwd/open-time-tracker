@@ -5,7 +5,11 @@ import NewTaskForm from "./NewTaskForm";
 const AddButton: StyledComponent<"button", {}> = styled.button`
   width: 100%;
 `
-const AddTask: React.FC = () => {
+interface AddTaskProps {
+  onAdd: (task: string) => void
+}
+
+const AddTask: React.FC<AddTaskProps> = (props: AddTaskProps) => {
   const [ showNewTaskForm, toggleNewTaskForm ] = useState<boolean>(false)
 
   const toggleNewTask = useCallback(
@@ -13,10 +17,15 @@ const AddTask: React.FC = () => {
     [showNewTaskForm, toggleNewTaskForm]
   )
 
+  const onAdd = useCallback((task: string) => {
+    props.onAdd(task)
+    toggleNewTask()
+  }, [props.onAdd, toggleNewTask])
+
   if (showNewTaskForm) {
     return (
       <NewTaskForm
-        onSave={() => toggleNewTask()}
+        onSave={onAdd}
         onCancel={() => toggleNewTask()}
       />
     );

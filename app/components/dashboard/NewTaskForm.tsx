@@ -1,13 +1,14 @@
 import React, { useState, useCallback } from "react";
 
 interface NewTaskFormProps {
-  onSave: () => void,
+  onSave: (task: string) => void,
   onCancel: () => void
 }
 
 const NewTaskForm: React.FC<NewTaskFormProps> = (props: NewTaskFormProps) => {
   const [task, setTask] = useState<string>('');
   const handleTaskChange = useCallback(e => setTask(e.target.value) , [setTask])
+  const onSave = useCallback(() => props.onSave(task), [task, props.onSave])
 
   return (
     <div className="field">
@@ -18,7 +19,7 @@ const NewTaskForm: React.FC<NewTaskFormProps> = (props: NewTaskFormProps) => {
       </div>
       <div className="field is-grouped">
         <p className="control">
-          <button className="button is-success" onClick={props.onSave}>
+          <button className="button is-success" onClick={onSave}>
             Save
           </button>
         </p>
