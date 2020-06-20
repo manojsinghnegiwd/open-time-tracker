@@ -19,11 +19,11 @@ const TaskManager: React.FC<TaskManagerProps> = (props: TaskManagerProps) => {
 
   return (
     <Container>
-      <AddTask onAdd={addTask} />
       <TaskList
         tasks={tasks}
         handleTaskUpdate={handleTaskUpdate}
       />
+      <AddTask onAdd={addTask} />
     </Container>
   );
 }

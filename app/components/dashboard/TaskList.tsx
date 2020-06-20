@@ -27,11 +27,13 @@ const TaskList: React.FC<TaskListProps> = (props: TaskListProps) => {
   return (
     <StyledTable className="table">
       <thead>
-        <th>Task</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>Duration</th>
-        <th></th>
+        <tr>
+          <th>Task</th>
+          <th>Date</th>
+          <th>Start</th>
+          <th>Duration</th>
+          <th></th>
+        </tr>
       </thead>
       <tbody>
         {

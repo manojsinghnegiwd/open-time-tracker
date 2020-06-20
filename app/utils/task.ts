@@ -11,3 +11,14 @@ export const generateNewTask = (task: string) => {
 
   return newTask
 }
+
+export const calculateDuration = (seconds: number) => {
+  let remainingSeconds = 0
+  const calculatedHours = Math.floor(seconds / 60 / 60)
+  remainingSeconds = seconds - (calculatedHours * 60 * 60)
+  const calculatedMinutes = Math.floor(remainingSeconds / 60)
+  remainingSeconds = seconds - (calculatedMinutes * 60 )
+  const calculatedSeconds = remainingSeconds
+
+  return `${calculatedHours < 10 ? `0${calculatedHours}` : calculatedHours}:${calculatedMinutes < 10 ? `0${calculatedMinutes}` : calculatedMinutes}:${calculatedSeconds < 10 ? `0${calculatedSeconds}` : calculatedSeconds}`
+}

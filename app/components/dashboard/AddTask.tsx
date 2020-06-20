@@ -1,10 +1,6 @@
 import React, {useState, useCallback} from "react";
-import styled, { StyledComponent } from "styled-components"
 import NewTaskForm from "./NewTaskForm";
 
-const AddButton: StyledComponent<"button", {}> = styled.button`
-  width: 100%;
-`
 interface AddTaskProps {
   onAdd: (task: string) => void
 }
@@ -33,12 +29,12 @@ const AddTask: React.FC<AddTaskProps> = (props: AddTaskProps) => {
 
   return (
     <div className="field">
-      <AddButton
+      <button
         className="button is-success"
         onClick={toggleNewTask}
       >
-        Add a new task
-      </AddButton>
+        Add Task
+      </button>
     </div>
   );
 }

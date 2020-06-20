@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import moment from "moment";
 import { Task } from "../../interfaces/Task"
 import PlayButton from './PlayButton';
+import { calculateDuration } from '../../utils/task';
 
 interface TaskProps {
     task: Task,
@@ -68,9 +69,9 @@ const TaskComponent: React.FC<TaskProps> = (props: TaskProps) => {
   return (
     <tr>
       <td>{props.task.name}</td>
+      <td>{moment(props.task.startDate).format('DD MMM')}</td>
       <td>{moment(props.task.startDate).format('hh:mm a')}</td>
-      <td>{moment(props.task.endDate).format('hh:mm a')}</td>
-      <td>{duration || props.task.duration}</td>
+      <td>{calculateDuration(duration || props.task.duration)}</td>
       <td>
         <PlayButton
           handlePlay={handlePlay}
