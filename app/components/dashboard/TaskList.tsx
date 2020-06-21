@@ -34,6 +34,7 @@ const TaskList: React.FC<TaskListProps> = (props: TaskListProps) => {
           <th>Start</th>
           <th>Duration</th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>

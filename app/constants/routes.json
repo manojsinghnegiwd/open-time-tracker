@@ -1,3 +1,4 @@
 {
-  "Dashboard": "/"
+  "Dashboard": "/",
+  "Stats": "/stats/:id"
 }

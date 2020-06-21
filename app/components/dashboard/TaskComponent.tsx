@@ -3,6 +3,7 @@ import moment from "moment";
 import { Task } from "../../interfaces/Task"
 import PlayButton from './PlayButton';
 import { calculateDuration } from '../../utils/task';
+import { Link } from 'react-router-dom';
 
 interface TaskProps {
     task: Task,
@@ -27,6 +28,9 @@ const TaskComponent: React.FC<TaskProps> = (props: TaskProps) => {
           handlePause={handleClose}
           isPaused={!props.isActiveTask}
         />
+      </td>
+      <td>
+        <Link to={`/stats/${props.task.id}`}>Stats</Link>
       </td>
     </tr>
   )
