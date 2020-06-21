@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SetStateAction, Dispatch } from 'react';
 import styled from "styled-components";
 import { Task } from '../../interfaces/Task';
 import TaskComponent from "./TaskComponent";
@@ -9,7 +9,8 @@ const StyledTable = styled.table`
 
 interface TaskListProps {
   tasks: Task[],
-  handleTaskUpdate: (task: Task) => void
+  activeTaskId: number | null,
+  setActiveTaskId: (id: number | null) => void
 }
 
 const TaskList: React.FC<TaskListProps> = (props: TaskListProps) => {
@@ -42,7 +43,8 @@ const TaskList: React.FC<TaskListProps> = (props: TaskListProps) => {
               <TaskComponent
                 key={index}
                 task={task}
-                handleTaskUpdate={props.handleTaskUpdate}
+                setActiveTaskId={props.setActiveTaskId}
+                isActiveTask={task.id === props.activeTaskId}
               />
             )
           )
