@@ -29,10 +29,19 @@ const TaskManager: React.FC<TaskManagerProps> = (props: TaskManagerProps) => {
 
     if (id) {
       start(activeTask.duration || 0)
+      new Notification('Started', {
+        body: `Tracking started for ${activeTask.name}`
+      })
     } else {
       stop()
+
+      const previousTask: Task = tasks.find(task => task.id === activeTaskId) || {} as Task
+
+      new Notification('Stopped', {
+        body: `Tracking stopped for ${previousTask.name}`
+      })
     }
-  }, [setActiveTaskId, start, stop, tasks])
+  }, [setActiveTaskId, start, stop, tasks, activeTaskId])
 
   useEffect(() => {
     const activeTask: Task = tasks.find(task => task.id === activeTaskId) || {} as Task
