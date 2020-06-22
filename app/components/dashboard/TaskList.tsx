@@ -1,7 +1,8 @@
-import React, { SetStateAction, Dispatch } from 'react';
+import React, { SetStateAction, Dispatch, useMemo } from 'react';
 import styled from "styled-components";
 import { Task } from '../../interfaces/Task';
 import TaskComponent from "./TaskComponent";
+import moment from "moment";
 
 const StyledTable = styled.table`
   width: 100%;
@@ -10,10 +11,15 @@ const StyledTable = styled.table`
 interface TaskListProps {
   tasks: Task[],
   activeTaskId: number | null,
-  setActiveTaskId: (id: number | null) => void
+  setActiveTaskId: (id: number | null) => void,
+  deleteTask: (id: number) => void
 }
 
 const TaskList: React.FC<TaskListProps> = (props: TaskListProps) => {
+
+  const sortedTasks = useMemo(() => props.tasks.sort(
+    (taskA, taskB) => moment(taskB.startDate).diff(moment(taskA.startDate))
+  ), [props.tasks])
 
   if (!props.tasks.length) {
     return (
@@ -34,18 +40,18 @@ const TaskList: React.FC<TaskListProps> = (props: TaskListProps) => {
           <th>Start</th>
           <th>Duration</th>
           <th></th>
-          <th></th>
         </tr>
       </thead>
       <tbody>
         {
-          props.tasks.map(
+          sortedTasks.map(
             (task, index) => (
               <TaskComponent
                 key={index}
                 task={task}
                 setActiveTaskId={props.setActiveTaskId}
                 isActiveTask={task.id === props.activeTaskId}
+                deleteTask={props.deleteTask}
               />
             )
           )

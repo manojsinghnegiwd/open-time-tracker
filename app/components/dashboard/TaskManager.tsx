@@ -17,10 +17,17 @@ interface TaskManagerProps {
 }
 
 const TaskManager: React.FC<TaskManagerProps> = (props: TaskManagerProps) => {
-  const { tasks, addTask, handleTaskUpdate } = useTaskManager(props.storeManager)
+  const { tasks, addTask, handleTaskUpdate, deleteTask } = useTaskManager(props.storeManager)
   const [ activeTaskId, setActiveTaskId ] = useState<number | null>(null)
 
   const { duration, start, stop } = useTimer(1000);
+
+  const handleDeleteTask = (id: number) => {
+    const taskToBeDeleted: Task = tasks.find(task => task.id === id) || {} as Task
+    deleteTask(id, () => new Notification('Deleted', {
+      body: `${taskToBeDeleted.name}`
+    }))
+  }
 
   const changeTask = useCallback((id: number | null) => {
     setActiveTaskId(id)
@@ -57,6 +64,7 @@ const TaskManager: React.FC<TaskManagerProps> = (props: TaskManagerProps) => {
         tasks={tasks}
         activeTaskId={activeTaskId}
         setActiveTaskId={changeTask}
+        deleteTask={handleDeleteTask}
       />
       <AddTask onAdd={addTask} />
     </Container>

@@ -31,6 +31,13 @@ const useTaskManager = (storeManager: StoreManager) => {
     }
   }, [tasks, setTasks, storeManager])
 
+  const deleteTask = useCallback((id: number, callback?: () => void) => {
+    const filteredTasks = tasks.filter(task => task.id !== id)
+    setTasks(filteredTasks)
+    storeTasks(filteredTasks)
+    if (callback) callback()
+  }, [tasks])
+
   useEffect(() => {
     const load = async () => {
       const list = await storeManager.load()
@@ -42,7 +49,8 @@ const useTaskManager = (storeManager: StoreManager) => {
   return {
     tasks,
     addTask,
-    handleTaskUpdate
+    handleTaskUpdate,
+    deleteTask
   }
 }
 

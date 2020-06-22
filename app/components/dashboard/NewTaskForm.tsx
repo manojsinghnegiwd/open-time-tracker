@@ -8,7 +8,11 @@ interface NewTaskFormProps {
 const NewTaskForm: React.FC<NewTaskFormProps> = (props: NewTaskFormProps) => {
   const [task, setTask] = useState<string>('');
   const handleTaskChange = useCallback(e => setTask(e.target.value) , [setTask])
-  const onSave = useCallback(() => props.onSave(task), [task, props.onSave])
+  const onSave = useCallback(() => {
+    if (task.trim()) {
+      props.onSave(task)
+    }
+  }, [task, props.onSave])
 
   return (
     <div className="field">
@@ -19,12 +23,12 @@ const NewTaskForm: React.FC<NewTaskFormProps> = (props: NewTaskFormProps) => {
       </div>
       <div className="field is-grouped">
         <p className="control">
-          <button className="button is-success" onClick={onSave}>
+          <button className="button is-success is-light is-rounded" onClick={onSave}>
             Save
           </button>
         </p>
         <p className="control">
-          <button className="button is-danger"  onClick={props.onCancel}>
+          <button className="button is-danger is-light is-rounded"  onClick={props.onCancel}>
             Cancel
           </button>
         </p>

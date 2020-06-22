@@ -1,5 +1,16 @@
 import React, {useState, useCallback} from "react";
 import NewTaskForm from "./NewTaskForm";
+import styled from "styled-components";
+
+const AddButtonContainer = styled.div`
+  text-align: center;
+`
+
+const AddButton = styled.button`
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+`
 
 interface AddTaskProps {
   onAdd: (task: string) => void
@@ -28,14 +39,14 @@ const AddTask: React.FC<AddTaskProps> = (props: AddTaskProps) => {
   }
 
   return (
-    <div className="field">
-      <button
-        className="button is-success"
+    <AddButtonContainer className="field">
+      <AddButton
+        className="button is-primary is-light"
         onClick={toggleNewTask}
       >
-        Add Task
-      </button>
-    </div>
+        <i className="fas fa-plus"></i>
+      </AddButton>
+    </AddButtonContainer>
   );
 }
 
